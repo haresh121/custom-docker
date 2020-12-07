@@ -41,7 +41,7 @@ RUN apt-get install -y --fix-missing \
 
 RUN add-apt-repository ppa:jonathonf/python-3.6
 RUN apt-get update
-RUN apt-get install python3.6 libpython3.6
+RUN apt-get install python3.8 libpython3.8
 
 # For CUDA profiling, TensorFlow requires CUPTI.
 ENV LD_LIBRARY_PATH /usr/local/cuda/extras/CUPTI/lib64:$LD_LIBRARY_PATH
@@ -77,11 +77,11 @@ RUN ln -s $(which ${PYTHON}) /usr/local/bin/python
 
 RUN pip install tensorflow-gpu
 
-#COPY bashrc /etc/bash.bashrc
-#RUN chmod a+rwx /etc/bash.bashrc
+COPY bashrc /etc/bash.bashrc
+RUN chmod a+rwx /etc/bash.bashrc
 
 RUN ${PIP} --no-cache-dir install jupyter matplotlib pyinstrument
-# RUN ${PIP} install jupyter matplotlib o pencv-python opencv-contrib-python pyinstrument
+# RUN ${PIP} install jupyter matplotlib opencv-python opencv-contrib-python pyinstrument
 
 # Core linux dependencies. 
 RUN apt-get install -y --fix-missing \
